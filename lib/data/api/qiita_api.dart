@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:qiita_app/model/article.dart';
+import 'package:qiita_app/domain/model/article.dart';
 
-class QiitaClient {
+class QiitaApi {
   static Future<List<Article>> fetchArticle(
       {int page = 1, int perPage = 10}) async {
     const baseUrl = 'https://qiita.com/api/v2/items';

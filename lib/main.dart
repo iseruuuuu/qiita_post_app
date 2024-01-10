@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qiita_app/qiita_screen.dart';
+import 'package:qiita_app/feature/qiita/qiita_screen.dart';
 
 void main() {
   runApp(const MyApp());

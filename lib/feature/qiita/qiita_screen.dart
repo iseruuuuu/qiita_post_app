@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qiita_app/api/qiita_client.dart';
-import 'package:qiita_app/model/article.dart';
+import 'package:qiita_app/data/api/qiita_api.dart';
+import 'package:qiita_app/domain/model/article.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class QiitaScreen extends StatefulWidget {
@@ -22,8 +22,9 @@ class _QiitaScreenState extends State<QiitaScreen> {
     controller.addListener(_scrollListener);
   }
 
+
   void getData() {
-    QiitaClient.fetchArticle(page: currentPage).then((articles) {
+    QiitaApi.fetchArticle(page: currentPage).then((articles) {
       setState(() {
         posts.addAll(articles);
         currentPage++;
