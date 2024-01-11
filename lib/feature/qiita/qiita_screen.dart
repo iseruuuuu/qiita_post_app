@@ -1,52 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:qiita_app/data/api/qiita_api.dart';
-import 'package:qiita_app/domain/model/article.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:qiita_app/feature/qiita/qiita_notifier.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class QiitaScreen extends StatefulWidget {
+class QiitaScreen extends HookConsumerWidget {
   const QiitaScreen({super.key});
 
   @override
-  State<QiitaScreen> createState() => _QiitaScreenState();
-}
-
-class _QiitaScreenState extends State<QiitaScreen> {
-  List<Article> posts = [];
-  int currentPage = 1;
-  final ScrollController controller = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-    controller.addListener(_scrollListener);
-  }
-
-
-  void getData() {
-    QiitaApi.fetchArticle(page: currentPage).then((articles) {
-      setState(() {
-        posts.addAll(articles);
-        currentPage++;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final posts = ref.watch(qiitaNotifierProvider);
+    final controller = useScrollController();
+    useEffect(() {
+      ref.read(qiitaNotifierProvider.notifier).fetchArticles();
+      controller.addListener(() {
+        if (controller.position.pixels == controller.position.maxScrollExtent) {
+          ref.read(qiitaNotifierProvider.notifier).fetchArticles();
+        }
       });
-    });
-  }
-
-  void _scrollListener() {
-    if (controller.position.pixels == controller.position.maxScrollExtent) {
-      getData();
-    }
-  }
-
-  @override
-  void dispose() {
-    controller.removeListener(_scrollListener);
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+      return controller.dispose;
+    }, [controller]);
     return Scaffold(
       backgroundColor: const Color(0xFFF6F6F4),
       appBar: AppBar(
@@ -64,7 +37,7 @@ class _QiitaScreenState extends State<QiitaScreen> {
             child: posts.isNotEmpty
                 ? RefreshIndicator(
                     onRefresh: () async {
-                      getData();
+                      ref.read(qiitaNotifierProvider.notifier).fetchArticles();
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
