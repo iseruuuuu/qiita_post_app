@@ -61,65 +61,61 @@ class QiitaScreen extends HookConsumerWidget {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 15,
+                                          vertical: 10,
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 10,
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 25,
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                      posts[index].user.iconUrl,
-                                                    ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundImage:
+                                                      NetworkImage(
+                                                    posts[index].user.iconUrl,
                                                   ),
-                                                  const SizedBox(width: 10),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        posts[index].user.id,
-                                                        style: const TextStyle(
-                                                          color:
-                                                              Color(0xFF101010),
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        posts[index]
-                                                            .createdTime,
-                                                        style: const TextStyle(
-                                                          color:
-                                                              Color(0xFFB3B3B3),
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 10),
-                                              Text(
-                                                posts[index].title,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15,
                                                 ),
+                                                const SizedBox(width: 10),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                  children: [
+                                                    Text(
+                                                      posts[index].user.id,
+                                                      style: const TextStyle(
+                                                        color:
+                                                            Color(0xFF101010),
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      posts[index]
+                                                          .createdTime,
+                                                      style: const TextStyle(
+                                                        color:
+                                                            Color(0xFFB3B3B3),
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                              posts[index].title,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
